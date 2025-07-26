@@ -11,13 +11,14 @@ import (
 
 type server struct {
 	productMap map[string]*pb.Product
+	pb.UnimplementedProductInfoServer
 }
 
 // AddProduct implements ecommerce.AddProduct
 func (s *server) AddProduct(ctx context.Context,in *pb.Product) (*pb.ProductId,error){
 	id,err := uuid.NewUUID()
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Error while generating Product ID",err)
+		return nil, status.Errorf(codes.Internal, "Error while generating Product ID : %v",err)
 	}
 	in.Id = id.String()
 	if s.productMap == nil {
