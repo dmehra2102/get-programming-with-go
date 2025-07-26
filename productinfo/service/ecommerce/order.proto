@@ -1,0 +1,19 @@
+syntax = "proto3";
+package ecommerce;
+option go_package = "productinfo/service/ecommerce";
+
+message OrderId {
+    string value = 1;
+}
+
+message Order {
+    string id = 1;
+    repeated string items = 2;
+    string description = 3;
+    float price = 4;
+    string destination = 5;
+}
+
+service OrderManagement {
+    rpc getOrder(OrderId) returns (Order);
+}

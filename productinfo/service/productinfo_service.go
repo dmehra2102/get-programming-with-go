@@ -11,7 +11,9 @@ import (
 
 type server struct {
 	productMap map[string]*pb.Product
+	orderMap map[string]*pb.Order
 	pb.UnimplementedProductInfoServer
+	pb.UnimplementedOrderManagementServer
 }
 
 // AddProduct implements ecommerce.AddProduct
