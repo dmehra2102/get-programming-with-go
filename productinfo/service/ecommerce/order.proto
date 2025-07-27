@@ -18,5 +18,6 @@ message Order {
 
 service OrderManagement {
     rpc getOrder(OrderId) returns (Order);
+    rpc createOrder(Order) returns (OrderId);
     rpc searchOrders(google.protobuf.StringValue) returns (stream Order);
 }
