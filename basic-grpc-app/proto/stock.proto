@@ -1,0 +1,16 @@
+syntax = "proto3";
+option go_package = "grpc_app/service";
+
+message StockRequest {
+    string symbol = 1;
+}
+
+message StockResponse {
+    string symbol = 1;
+    double price = 2;
+    string timestamp = 3;
+}
+
+service StockService {
+    rpc GetStockPrice(StockRequest) returns (stream StockResponse);
+}

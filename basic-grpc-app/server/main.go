@@ -11,6 +11,7 @@ import (
 
 type server struct {
 	pb.UnimplementedGreeterServer
+	pb.UnimplementedStockServiceServer
 }
 
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error){
@@ -24,7 +25,9 @@ func main() {
 		log.Fatalf("failed to listen: %v",err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
+	serverInstance := &server{}
+	pb.RegisterGreeterServer(s,serverInstance)
+	pb.RegisterStockServiceServer(s,serverInstance)
 	log.Println("Starting gRPC listener on port : 50051")
 
 	if err := s.Serve(lis); err != nil {

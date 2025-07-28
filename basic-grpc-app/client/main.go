@@ -19,6 +19,8 @@ func main() {
 	defer conn.Close()
 
 	c := pb.NewGreeterClient(conn)
+	stockClient := pb.NewStockServiceClient(conn)
+
 
 	ctx,cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
@@ -27,4 +29,7 @@ func main() {
 		log.Fatalf("could not greet: %v", err)
 	}
 	log.Printf("Greeting: %s", resp.GetMessage())
+
+	// Stock Operation
+	stockClientOperation(stockClient)
 }
