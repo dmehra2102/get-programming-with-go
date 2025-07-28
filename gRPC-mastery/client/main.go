@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/dmehra2102/grpc-mastery/proto"
+	pb "github.com/dmehra2102/grpc-mastery/proto/user"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -64,6 +64,6 @@ func main() {
 	}
 	_, err = client.GetUser(ctx, getUserNotFoundReq)
 	if err!= nil {
-		log.Printf("Attempted to get non-existent user, got expected error: %v", err)
+		log.Printf("Attempted to get non-existent user, got expected error: %v", err.Error())
 	}
 }

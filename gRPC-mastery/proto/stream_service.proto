@@ -1,0 +1,17 @@
+syntax = "proto3";
+package stream;
+option go_package = "proto/stream;stream";
+
+message StreamRequest {
+    string message = 1;
+}
+
+message StreamResponse {
+    string result = 1;
+}
+
+service StreamService {
+    rpc GetMessages(StreamRequest) returns (stream StreamResponse);
+    rpc SendMessages(stream StreamRequest) returns (StreamResponse);
+    rpc Chat(stream StreamRequest) returns (stream StreamResponse);
+}
