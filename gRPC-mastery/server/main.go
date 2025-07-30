@@ -9,6 +9,8 @@ import (
 	"sync"
 	"time"
 
+	grpc_logging "github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/logging"
+
 	pbStream "github.com/dmehra2102/grpc-mastery/proto/stream"
 	pb "github.com/dmehra2102/grpc-mastery/proto/user"
 	"google.golang.org/grpc"
@@ -92,6 +94,12 @@ func (s *streamServiceServer) SendMessages(stream pbStream.StreamService_SendMes
 		log.Printf("Received client stream request: %s", req.GetMessage())
 		receivedMessages = append(receivedMessages, req.GetMessage())
 	}
+}
+
+func interceptorLogger(l *log.Logger) grpc_logging.Logger {
+	return grpc_logging.LoggerFunc(func(ctx context.Context, level grpc_logging.Level, msg string, fields ...any) {
+		l.Printf("%d: %s %v", level, msg, fields)
+	})
 }
 
 func main() {

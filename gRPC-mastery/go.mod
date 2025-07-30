@@ -3,6 +3,7 @@ module github.com/dmehra2102/grpc-mastery
 go 1.23.3
 
 require (
+	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.3.2
 	google.golang.org/grpc v1.74.2
 	google.golang.org/protobuf v1.36.6
 )
